@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    Hello
+    @include('components.auth.registration')
 @endsection
