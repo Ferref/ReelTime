@@ -16,10 +16,6 @@ body {
     width: 100vw;
 }
 
-/* Home */
-.home-container {
-}
-
 /* Auth */
 .auth-container {
     border-radius: 1rem;
