@@ -1,4 +1,5 @@
 <form id="login" name="login-form" class="d-none d-flex gap-3 flex-column">
+  <img src="{{ asset('images/icons/movies-svgrepo-com.svg') }}" class="star" alt="movies icon">
   <div class="form-group">
     <label for="username" class="pb-1">Username</label>
     <input type="text" class="form-control" name="username" id="username" placeholder="Enter username" required>

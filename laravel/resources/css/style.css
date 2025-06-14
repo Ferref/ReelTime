@@ -25,6 +25,17 @@ body {
     z-index: 2;
 }
 
+/* Star */
+.star {
+  height: 100px;
+  transition: transform 0.3s ease;
+}
+
+.star:hover {
+  transform: scale(1.25);
+}
+
+/* Moving bg */
 
 section {
   position: relative;
