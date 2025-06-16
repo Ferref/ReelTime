@@ -1,4 +1,5 @@
-<form id="registration" name="reg-form" class="d-flex gap-3 flex-column">
+<form id="registration" method="POST" action="{{ route('register') }}" name="reg-form" class="d-flex gap-3 flex-column">
+  @csrf
   <div class="form-group">
     <label for="email" class="pb-1">Email</label>
     <input type="text" name="email" id="email" class="form-control" placeholder="Enter email"  required>
@@ -17,7 +18,7 @@
   </div>
   <div class="form-group">
     <label for="password" class="pb-1">Confirm Password</label>
-    <input type="password" name="password_confirmed" class="form-control" placeholder="Confirm Password" required>
+    <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" required>
   </div>
   <button type="submit" class="my-1 btn btn-success">Register</button>
 </form>
