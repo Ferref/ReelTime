@@ -15,5 +15,9 @@
     <div class="main-container container-fluid h-100 w-100 p-0 m-0">
         @yield('content')
     </div>
+
+    @if(Auth::check())
+        @include('layouts.footer')
+    @endif
 </body>
 </html>

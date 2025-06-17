@@ -20,7 +20,17 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+        </li>
+        <li class="nav-item d-block d-xl-none">
+          <a class="nav-link">Search</a>
+        </li>
       </ul>
     </div>
+
+    <form class="d-none d-xl-flex d-flex position-absolute end-0 top-0 ps-3 z-3 px-3" role="search">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+        <button class="btn btn-outline-light" type="submit">Search</button>
+    </form>
+
   </div>
 </nav>
