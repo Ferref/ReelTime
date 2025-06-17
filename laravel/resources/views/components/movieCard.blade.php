@@ -3,6 +3,6 @@
   <div class="card-body d-flex flex-column justify-content-between">
     <h3 class="mx-auto card-title my-3">{{ $movie['title'] }}</h3>
     <p class="card-text">{{ $movie['overview'] }}</p>
-    <a href="#" class="btn custom-btn">Movie details</a>
+    <a href="{{ route('movie.details', $movie['id']) }}" class="btn btn-primary">Movie details</a>
   </div>
 </div>

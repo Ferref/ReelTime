@@ -7,12 +7,19 @@ use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
+    protected string $apiKey;
+
+    public function __construct() {
+        $this->apiKey = env('THEMOVIE_API_KEY');
+    }
+
     public function getMovies(Request $request){
-        $apiKey = env('THEMOVIE_API_KEY');
+
         $page = request()->query('page', 1);
 
-        $response = Http::get('https://api.themoviedb.org/3/discover/movie', [
-            'api_key' => $apiKey,
+        $url = 'https://api.themoviedb.org/3/discover/movie';
+        $response = Http::get($url, [
+            'api_key' => $this->apiKey,
             'sort_by' => 'popularity.desc',
             'page' => $page
         ]);
@@ -20,5 +27,21 @@ class MovieController extends Controller
         $movies = $response->json();
 
         return view('home', compact('movies'));
+    }
+
+    public function getMovieDetails($id){
+        $url = "https://api.themoviedb.org/3/movie/{$id}";
+
+        $response = Http::get($url, [
+            'api_key' => $this->apiKey,
+        ]);
+
+        if($response->failed()){
+            abort(404, "Movie not found");
+        }
+
+        $details = $response->json();
+
+        return view("details", compact('details'));
     }
 }

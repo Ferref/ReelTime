@@ -24,6 +24,10 @@ body {
   color: white;
 }
 
+.navbar {
+  border-bottom: 1px solid whitesmoke;
+}
+
 /* Auth */
 .auth-container {
     border-radius: 5rem;
@@ -196,4 +200,9 @@ body {
   border: 1px solid whitesmoke;
   color: whitesmoke;
 }
+
+.details {
+  animation: fadeIn 1s ease;
+}
+
 
