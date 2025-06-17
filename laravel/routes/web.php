@@ -14,3 +14,4 @@ Route::get('/', function () {
 Route::get('/home', [MovieController::class, 'getMovies'])->name('home');
 Route::post('/register', [UserController::class, 'store'])->name('register');
 Route::post('/login', [UserController::class, 'login'])->name('login');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');

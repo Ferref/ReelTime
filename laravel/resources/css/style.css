@@ -14,7 +14,8 @@ html, body {
 body {
     height: 100vh;
     width: 100vw;
-    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+    background: #020024;
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(121, 9, 117, 1) 35%, rgba(113, 4, 143, 1) 100%);
     background-size: cover;
 }
 
@@ -68,18 +69,17 @@ section .wave {
   width: 100%;
   height: 100%;
   background: purple;
-  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 1);
   transition: 0.5s;
 }
 section .wave span {
   content: "";
   position: absolute;
-  width: 325vh;
-  height: 325vh;
-  top: 0;
+  width: 300vh;
+  height: 300vh;
   left: 50%;
-  transform: translate(-50%, -75%);
-  background: #000;
+  transform: translate(-30%, -75%);
+  background: #020024;
 }
 .content {
   position: relative;
@@ -90,18 +90,18 @@ section .wave span {
 }
 section .wave span:nth-child(1) {
   border-radius: 45%;
-  background: rgba(20, 20, 20, 1);
+  background: black;
   animation: animate 5s linear infinite;
 }
 
 section .wave span:nth-child(2) {
   border-radius: 40%;
-  background: rgba(20, 20, 20, 0.5);
+  background: white;
   animation: animate 10s linear infinite;
 }
 section .wave span:nth-child(3) {
   border-radius: 42.5%;
-  background: rgba(20, 20, 20, 0.5);
+  background: #020024;
   animation: animate 15s linear infinite;
 }
 @keyframes animate {

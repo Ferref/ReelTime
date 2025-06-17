@@ -47,7 +47,6 @@ class UserController extends Controller
 
 
     public function login(Request $request)
-
     {
         $credentials = $request->validate([
             'username' => ['required'],
@@ -72,5 +71,10 @@ class UserController extends Controller
             'errors' => 'Invalid username or password'
         ], 422);
 
+    }
+
+    public function logout(Request $request) {
+        Auth::logout();
+        return redirect('/');
     }
 }
