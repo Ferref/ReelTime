@@ -34,7 +34,7 @@ class UserController extends Controller
 
         return response()->json([
             'message' => 'success',
-            'redirect' => '/getMovies'
+            'redirect' => '/home'
         ], 200);
 
         } catch (ValidationException $e) {
@@ -63,7 +63,7 @@ class UserController extends Controller
 
             return response()->json([
                 'message' => 'success',
-                'redirect' => '/getMovies'
+                'redirect' => '/home'
             ], 200);
         }
 

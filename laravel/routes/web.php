@@ -11,6 +11,6 @@ Route::get('/', function () {
     return view('auth');
 });
 
-Route::get('/getMovies', [MovieController::class, 'getMovies'])->name('getMovies');
+Route::get('/home', [MovieController::class, 'getMovies'])->name('home');
 Route::post('/register', [UserController::class, 'store'])->name('register');
 Route::post('/login', [UserController::class, 'login'])->name('login');
