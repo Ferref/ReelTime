@@ -3,15 +3,10 @@
 @section('content')
     <div class="home-container container-fluid position-relative p-0 m-0 d-flex justify-content-center align-items-center h-100 flex-column">
         <div class="auth-container col-12 col-md-9 col-lg-6 position-relative bg-light">
-            @if ($errors->any())
-                <div id="errorBox" class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+
+            <div id="errorBox" class="d-none alert alert-danger d-flex align-items-center">
+                <ul id="errorList" class="m-0 w-100"></ul>
+            </div>
 
             @include('components.auth.registration')
             @include('components.auth.login')
@@ -30,7 +25,7 @@
 @endsection
 
 @push('scripts')
-    @vite('resources/js/auth/switchform.js')
+    @vite(['resources/js/auth/switchform.js', 'resources/js/auth/auth.js'])
 @endpush
 
 

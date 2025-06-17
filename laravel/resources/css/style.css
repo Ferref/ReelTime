@@ -28,15 +28,23 @@ body {
 /* Star */
 .star {
   height: 100px;
-  transition: transform 0.3s ease;
+  transform-origin: center;
 }
 
-.star:hover {
-  transform: scale(1.25);
+.star-loaded {
+  animation: starSpinScale 1s forwards;
+}
+
+@keyframes starSpinScale {
+  0% {
+    transform: rotate(0) scale(0);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
 }
 
 /* Moving bg */
-
 section {
   position: relative;
   width: 100%;
@@ -100,4 +108,9 @@ section .wave span:nth-child(3) {
 
 .waves {
     z-index: 0;
+}
+
+/* Auth */
+#errorBox {
+  min-height: 50px;
 }

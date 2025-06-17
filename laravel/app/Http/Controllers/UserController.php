@@ -2,28 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
-    public function store(Request $request) : RedirectResponse {
-        $validated = $request->validate([
-            'username' => 'required|string|max:100|unique:users,username',
-            'email'    => 'required|string|email|max:255|unique:users,email',
-            'password' => [
-                'required',
-                'string',
-                'min:8',
-                'regex:/[A-Z]/',
-                'regex:/[0-9]/',
-                'confirmed',
-            ],
-        ]);
+    public function store(Request $request) {
+        try {
+            $validated = $request->validate([
+                'username' => 'required|string|max:100|unique:users,username',
+                'email'    => 'required|string|email|max:255|unique:users,email',
+                'password' => [
+                    'required',
+                    'string',
+                    'min:8',
+                    'regex:/[A-Z]/',
+                    'regex:/[0-9]/',
+                    'confirmed',
+                ],
+            ]);
 
         User::create([
             'username' => $validated['username'],
@@ -31,27 +32,45 @@ class UserController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        return redirect('/home');
+        return response()->json([
+            'message' => 'success',
+            'redirect' => '/home'
+        ], 200);
+
+        } catch (ValidationException $e) {
+            return response()->json([
+                'message' => 'Validation failed',
+                'errors' => $e->errors(),
+            ], 422);
+        }
     }
 
 
-    public function login(Request $request): RedirectResponse
+    public function login(Request $request)
 
     {
         $credentials = $request->validate([
-            'username' => ['required', 'email'],
+            'username' => ['required'],
             'password' => ['required'],
         ]);
 
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt([
+            'username' => $credentials['username'],
+            'password' => $credentials['password']
+        ])) {
             $request->session()->regenerate();
-            return redirect()->intended('dashboard');
+
+            return response()->json([
+                'message' => 'success',
+                'redirect' => '/home'
+            ], 200);
         }
 
-        return back()->withErrors([
-            'username' => 'The provided credentials do not match our records.'
-        ])->onlyInput('username');
+        return response()->json([
+            'message' => 'Invalid credentials',
+            'errors' => 'Invalid username or password'
+        ], 422);
 
     }
 }
