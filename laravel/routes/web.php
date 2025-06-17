@@ -16,3 +16,4 @@ Route::get('/home', function () {
 
 
 Route::post('/register', [UserController::class, 'store'])->name('register');
+Route::post('/login', [UserController::class, 'login'])->name('login');
