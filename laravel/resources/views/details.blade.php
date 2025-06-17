@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="d-flex justify-content-center align-items-center h-100  my-5 details">
-    <div class="custom-dark container-fluid m-0 shadow-lg p-5 h-100">
-        <div class="row g-0 h-100">
+<div class="details custom-dark d-flex justify-content-center align-items-center py-5">
+    <div class="big-card container-fluid w-75 shadow-lg h-100">
+        <div class="row h-100">
             {{-- Poster --}}
-            <div class="col-md-4 d-flex align-items-center h-100">
+            <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-start align-items-center mb-4 mb-lg-0">
                 <img 
                   src="https://image.tmdb.org/t/p/w500{{ $details['poster_path'] }}" 
-                  class="img-fluid rounded"
+                  class="img-fluid rounded poster-img"
                   alt="{{ $details['title'] }}"
                 >
             </div>
 
             {{-- Info --}}
-            <div class="col-md-8 d-flex flex-column p-4 h-100" style="overflow-y: auto;">
+            <div class="col-12 col-lg-8 d-flex flex-column p-4 p-lg-5 h-100" style="overflow-y: auto;">
                 {{-- Title and Tagline --}}
                 <h2 class="mb-1">{{ $details['title'] }}</h2>
                 @if(!empty($details['tagline']))

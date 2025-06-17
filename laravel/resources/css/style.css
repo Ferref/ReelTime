@@ -196,6 +196,11 @@ body {
 }
 
 .custom-btn:hover {
+  background-color: whitesmoke;
+  color: black;
+}
+
+.custom-btn:hover {
   background-color: black;
   border: 1px solid whitesmoke;
   color: whitesmoke;
@@ -203,6 +208,11 @@ body {
 
 .details {
   animation: fadeIn 1s ease;
+  min-height: 100vh;
+  display: flex;
 }
 
+.big-card {
+  padding-top: 7rem;
+}
 
