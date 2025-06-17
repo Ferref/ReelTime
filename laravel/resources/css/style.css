@@ -36,7 +36,6 @@ body {
 }
 
 /* Moving bg */
-
 section {
   position: relative;
   width: 100%;
@@ -100,4 +99,9 @@ section .wave span:nth-child(3) {
 
 .waves {
     z-index: 0;
+}
+
+/* Auth */
+#errorBox {
+  min-height: 50px;
 }

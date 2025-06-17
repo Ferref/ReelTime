@@ -1,10 +1,11 @@
 import $ from 'jquery';
 
-// Switch form
 $(function () {
     $('#switch-btn').on('click', function () {
         $('#registration').fadeToggle().toggleClass('d-none');
         $('#login').fadeToggle().toggleClass('d-none');
-        $('#errorBox').remove();
+        if (!$('#errorBox').hasClass('d-none')) {
+            $('#errorBox').addClass('d-none');
+        }
     });
 });
