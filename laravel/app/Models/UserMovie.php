@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserMovie extends Model
 {
-    protected $fillable = ['watchlist_id'];
+    protected $fillable = ['user_id', 'watchlist_id'];
 }

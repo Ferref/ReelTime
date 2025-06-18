@@ -56,6 +56,7 @@ class MovieController extends Controller
         $user = $request->user();
 
         UserMovie::create([
+            'user_id' => $user->id,
             'watchlist_id' => $request['id']
         ]);
 

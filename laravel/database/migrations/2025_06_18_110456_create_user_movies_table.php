@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_movies', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
             $table->integer('watchlist_id');
             $table->timestamps();
         });

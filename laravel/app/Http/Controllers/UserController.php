@@ -19,16 +19,18 @@ class UserController extends Controller
                 'password' => [
                     'required',
                     'min:6',
-                    'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
+                    'regex:/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*\-_=+.?]).+$/',
                     'confirmed'
                 ]
             ]);
 
-        User::create([
+        $user = User::create([
             'username' => $validated['username'],
             'email'    => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
+
+        Auth::login($user);
 
         return response()->json([
             'message' => 'success',
