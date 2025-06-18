@@ -11,9 +11,7 @@
 <body>
     @if(Auth::check())
         @include('layouts.navbar')
-        @isset($message)
-            @include('components.modal')
-        @endisset
+        @include('components.modal')
     @endif
     <div class="main-container container-fluid h-100 w-100 p-0 m-0">
         @yield('content')

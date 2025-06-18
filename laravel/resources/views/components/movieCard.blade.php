@@ -7,7 +7,7 @@
       <a href="{{ route('movie.details', $movie['id']) }}" class="btn btn-outline-light w-50 me-2">Movie details</a>
       <form action="{{ route('movie.towatchlist', $movie['id']) }}" method="POST" class="flex-fill me-2">
           @csrf
-          <button type="submit" class="btn btn-outline-light w-100">To watchlist</button>
+          <button type="submit" class="messageTrigger btn btn-outline-light w-100">To watchlist</button>
       </form>
     </div>
   </div>

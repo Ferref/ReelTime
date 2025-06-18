@@ -70,7 +70,7 @@
 
                 <form action="{{ route('movie.towatchlist', $details['id']) }}" method="POST" class="flex-fill me-2">
                     @csrf
-                    <button type="submit" class="btn btn-outline-light w-100">To watchlist</button>
+                    <button type="submit" class="messageTrigger btn btn-outline-light w-100">To watchlist</button>
                 </form>
                 </div>
             </div>
