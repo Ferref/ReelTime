@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\UserMovie;
 use Illuminate\Support\Facades\Http;
 
 use Illuminate\Http\Request;
@@ -44,4 +46,20 @@ class MovieController extends Controller
 
         return view("details", compact('details'));
     }
+
+    public function toWatchlist(Request $request)
+    {
+        request()->validate([
+            'id' => 'numeric',
+        ]);
+
+        $user = $request->user();
+
+        UserMovie::create([
+            'watchlist_id' => $request['id']
+        ]);
+
+        return response()->json(['message' => 'Movie added to watchlist']);
+    }
+
 }

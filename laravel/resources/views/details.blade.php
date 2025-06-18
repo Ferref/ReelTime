@@ -57,13 +57,21 @@
                 @endif
 
                 {{-- Homepage button --}}
-                <div>
+                <div class="d-flex w-100 flex-wrap">
                     @if(!empty($details['homepage']))
-                        <a href="{{ $details['homepage'] }}" target="_blank" rel="noopener" class="btn btn-outline-light me-2">
+                        <a href="{{ $details['homepage'] }}" target="_blank" rel="noopener" class="btn flex-fill btn-outline-light me-2 mb-2">
                             Official Website
                         </a>
                     @endif
-                    <a href="{{ url()->previous() }}" class="btn btn-outline-light">Back to movies</a>
+
+                    <a href="{{ url()->previous() }}" class="btn flex-fill btn-outline-light me-2 mb-2">
+                        Back to movies
+                    </a>
+
+                <form action="{{ route('movie.towatchlist', $details['id']) }}" method="POST" class="flex-fill me-2">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-light w-100">To watchlist</button>
+                </form>
                 </div>
             </div>
         </div>

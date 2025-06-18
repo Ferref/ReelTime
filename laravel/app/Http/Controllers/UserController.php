@@ -18,12 +18,10 @@ class UserController extends Controller
                 'email'    => 'required|string|email|max:255|unique:users,email',
                 'password' => [
                     'required',
-                    'string',
-                    'min:8',
-                    'regex:/[A-Z]/',
-                    'regex:/[0-9]/',
-                    'confirmed',
-                ],
+                    'min:6',
+                    'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
+                    'confirmed'
+                ]
             ]);
 
         User::create([

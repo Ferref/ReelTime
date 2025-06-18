@@ -3,6 +3,12 @@
   <div class="card-body d-flex flex-column justify-content-between">
     <h3 class="mx-auto card-title my-3">{{ $movie['title'] }}</h3>
     <p class="card-text">{{ $movie['overview'] }}</p>
-    <a href="{{ route('movie.details', $movie['id']) }}" class="btn custom-btn">Movie details</a>
+    <div class="d-flex w-100">
+      <a href="{{ route('movie.details', $movie['id']) }}" class="btn btn-outline-light w-50 me-2">Movie details</a>
+      <form action="{{ route('movie.towatchlist', $movie['id']) }}" method="POST" class="flex-fill me-2">
+          @csrf
+          <button type="submit" class="btn btn-outline-light w-100">To watchlist</button>
+      </form>
+    </div>
   </div>
 </div>
