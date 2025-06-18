@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserMovie;
+use Exception;
 use Illuminate\Support\Facades\Http;
 
 use Illuminate\Http\Request;
@@ -47,20 +48,26 @@ class MovieController extends Controller
         return view("details", compact('details'));
     }
 
-    public function toWatchlist(Request $request)
+    public function toWatchlist(Request $request, $id)
     {
-        request()->validate([
-            'id' => 'numeric',
-        ]);
+        try {
+            if (!is_numeric($id)) {
+                return response()->json(['message' => 'Invalid movie ID.'], 422);
+            }
 
-        $user = $request->user();
+            $user = $request->user();
 
-        UserMovie::create([
-            'user_id' => $user->id,
-            'watchlist_id' => $request['id']
-        ]);
+            UserMovie::create([
+                'user_id' => $user->id,
+                'watchlist_id' => $id,
+            ]);
 
-        return response()->json(['message' => 'Movie added to watchlist']);
+            return response()->json(['message' => 'Movie added to watchlist']);
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(['message' => 'Validation failed', 'errors' => $e->errors()], 422);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()]);
+        }
     }
-
 }
