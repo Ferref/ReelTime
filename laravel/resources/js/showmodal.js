@@ -30,6 +30,9 @@ $(function() {
         const title = response.title || 'Success';
         const message = response.message || response.body || 'Operation completed.';
         showModal(title, message);
+        if ($trigger.hasClass('remove')) {
+          $trigger.closest('.card').remove();
+        }
       },
       error() {
         showModal('Error', 'Something went wrong.');
