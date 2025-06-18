@@ -21,7 +21,9 @@ Route::post('/login', [UserController::class, 'login'])->name('login');
 // If logged in
 Route::middleware([EnsureAuth::class])->group(function(){
     Route::get('/home', [MovieController::class, 'getMovies'])->name('home');
+    Route::get('/watchlater', [MovieController::class, 'getWatchlater'])->name('watchlater');
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
     Route::get('/movie/{id}', [MovieController::class, 'getMovieDetails'])->name('movie.details');
     Route::post('/movie/{id}', [MovieController::class, 'toWatchlist'])->name('movie.towatchlist');
+    Route::delete('/movie/{id}', [MovieController::class, 'removeFromWatchlist'])->name('movie.removefromwatchlist');
 });

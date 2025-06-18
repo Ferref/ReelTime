@@ -16,7 +16,7 @@
           <a class="nav-link active" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Watch Later</a>
+          <a class="nav-link" href="{{ route('watchlater') }}">Watch Later</a>
         </li>
         <li class="nav-item d-block d-xl-none">
           <a class="nav-link">Search</a>

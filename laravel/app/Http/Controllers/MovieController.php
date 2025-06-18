@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UserMovie;
 use Exception;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -57,10 +58,15 @@ class MovieController extends Controller
 
             $user = $request->user();
 
-            UserMovie::create([
+
+            $entry = UserMovie::firstOrCreate([
                 'user_id' => $user->id,
                 'watchlist_id' => $id,
             ]);
+
+            if (!$entry->wasRecentlyCreated) {
+                return response()->json(['message' => 'Movie is already in your watchlist']);
+            }
 
             return response()->json(['message' => 'Movie added to watchlist']);
 
@@ -69,5 +75,35 @@ class MovieController extends Controller
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()]);
         }
+    }
+
+    public function getWatchlater()
+    {
+        $user = Auth::user();
+        $ids  = $user->UserMovies->pluck('watchlist_id');
+
+        $movies = $ids->map(function($tmdbId){
+            $resp = Http::get("https://api.themoviedb.org/3/movie/{$tmdbId}", [
+                'api_key' => $this->apiKey,
+            ]);
+
+            return $resp->successful()
+                ? $resp->json()
+                : null;
+        })->filter();
+
+        return view('watchlater', compact('movies'));
+    }
+
+    public function removeFromWatchlist(int $id)
+    {
+        $deleted = UserMovie::where('user_id', Auth::id())
+            ->where('watchlist_id', $id)
+            ->delete();
+
+        return response()->json(
+            ['message' => $deleted ? 'Movie removed' : 'Not found'],
+            $deleted ? 200 : 404
+        );
     }
 }
