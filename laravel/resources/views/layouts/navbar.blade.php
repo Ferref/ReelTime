@@ -16,13 +16,13 @@
           <a class="nav-link active" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+          <a class="nav-link" href="#">Watch Later</a>
         </li>
         <li class="nav-item d-block d-xl-none">
           <a class="nav-link">Search</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('logout') }}">Logout</a>
         </li>
       </ul>
     </div>
