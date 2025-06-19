@@ -13,7 +13,7 @@
         @include('layouts.navbar')
         @include('components.modal')
     @endif
-    <div class="main-container h-100 container-fluid pb-3">
+    <div class="main-container h-100 container-fluid p-0 pb-3">
         @yield('content')
     </div>
 
