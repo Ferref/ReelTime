@@ -10,9 +10,11 @@
             @include('components.MovieCard', ['movie' => $movie])
           @endforeach
         @else
-          <p class="text-center">
+        <div class="messagetext container-fluid h-100 w-100 position-absolute top-100 start-0 d-flex justify-content-center align-items-center">
+          <p class="text-light text-center m-0">
             You don’t have any movies in your Watch Later list yet.
           </p>
+        </div>
         @endif
 
       </div>

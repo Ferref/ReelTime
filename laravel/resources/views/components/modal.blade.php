@@ -8,7 +8,11 @@
       </div>
 
       <div class="modal-body d-flex gap-3 flex-column">
-        <a class="link-opacity-100" href="{{ route('watchlater') }}">Go to Watch Later</a>
+        @if(Route::currentRouteName() === 'home')
+          <a class="link-opacity-100" href="{{ route('watchlater') }}">Go to Watch Later</a>
+        @elseif(Route::currentRouteName() === 'watchlater')
+          <a class="link-opacity-100" href="{{ route('home') }}">Go to home</a>
+        @endif
         <p>{{ $message['body'] ?? 'Body content goes here.' }}</p>
       </div>
 
