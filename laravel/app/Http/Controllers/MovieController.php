@@ -106,4 +106,5 @@ class MovieController extends Controller
             $deleted ? 200 : 404
         );
     }
+
 }

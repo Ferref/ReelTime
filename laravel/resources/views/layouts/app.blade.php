@@ -12,6 +12,10 @@
     @if(Auth::check())
         @include('layouts.navbar')
         @include('components.modal')
+        @if (isset($movies))
+            <input type="hidden" id="movies-data" value='@json($movies)' />
+            <datalist id="movie-suggestions"></datalist>
+        @endif
     @endif
     <div class="main-container h-100 container-fluid p-0 pb-3">
         @yield('content')
