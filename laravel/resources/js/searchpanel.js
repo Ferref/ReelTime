@@ -18,7 +18,6 @@ $(function () {
         const matches = moviesData.filter(movie => movie.title.toLowerCase().includes(query));
 
         matches.forEach(movie => {
-            console.log(movie.title)
             movieSuggestions.append(`<option value="${movie.title}">`);
         })
     });

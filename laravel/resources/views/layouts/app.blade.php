@@ -13,8 +13,6 @@
         @include('layouts.navbar')
         @include('components.modal')
         @if (isset($movies))
-            <input type="text" id="search-input" list="movie-suggestions" autocomplete="off">
-            <datalist id="movie-suggestions"></datalist>
             <input
                 type="hidden"
                 id="movies-data"

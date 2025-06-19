@@ -4,7 +4,10 @@
     </button>
     <div id="search-box" class="d-none">
         <div class="d-inline-flex">
-            <input id="search-input" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+            <input id="search-input" list="movie-suggestions" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+            <datalist id="movie-suggestions"></datalist>
         </div>
     </div>
 </form>
+
+            
