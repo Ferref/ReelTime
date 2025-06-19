@@ -21,6 +21,7 @@ $(function() {
     const $form = $(this).closest('form');
     const action = $form.attr('action');
     const data = $form.serialize();
+    const button = $(this);
 
     $.ajax({
       url: action,
@@ -30,8 +31,8 @@ $(function() {
         const title = response.title || 'Success';
         const message = response.message || response.body || 'Operation completed.';
         showModal(title, message);
-        if ($trigger.hasClass('remove')) {
-          $trigger.closest('.card').remove();
+        if(button.hasClass('remove')){
+          button.closest('.removable').remove();
         }
       },
       error() {
