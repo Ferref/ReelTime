@@ -1,4 +1,4 @@
-# MyMovies
+# ReelTime
 Fork the code and check my website :)
 
 

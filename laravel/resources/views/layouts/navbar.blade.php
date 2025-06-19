@@ -2,7 +2,7 @@
   <div class="container-fluid position-relative">
 
     <a class="navbar-brand position-absolute start-0 top-0 ps-3 z-3" href="{{ route('home') }}">
-      MyMovies
+      ReelTime
     </a>
 
     <button class="navbar-toggler ms-auto z-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -21,18 +21,24 @@
             <li class="nav-item d-block d-lg-none">
               <a class="nav-link" href="{{ route('logout') }}">Logout</a>
             </li>
+
+            <li class="nav-item">
+                @include('components.search')
+            </li>
         </ul>
 
     </div>
 
-    <a id="logout" class="d-none d-lg-block nav-link position-absolute end-0 top-1 pe-3 z-3" href="{{ route('logout') }}">
+    <a class="text-grey d-none d-lg-block nav-link position-absolute end-0 top-1 pe-3 z-3" href="{{ route('logout') }}">
       Logout
     </a>
 
-    <!-- <form class="d-none d-xl-flex d-flex position-absolute end-0 top-0 ps-3 z-3 px-3" role="search">
-    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-        <button class="btn btn-outline-light" type="submit">Search</button>
-    </form> -->
+
 
   </div>
 </nav>
+
+
+@stack('scripts')
+  @vite(['resources/js/searchpanel.js'])
+@endstack

@@ -228,6 +228,6 @@ footer {
     animation: fadeIn 1s;
 }
 
-#logout {
+.text-grey{
   color: #717171;
 }
