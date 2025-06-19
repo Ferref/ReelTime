@@ -13,8 +13,13 @@
         @include('layouts.navbar')
         @include('components.modal')
         @if (isset($movies))
-            <input type="hidden" id="movies-data" value='@json($movies)' />
+            <input type="text" id="search-input" list="movie-suggestions" autocomplete="off">
             <datalist id="movie-suggestions"></datalist>
+            <input
+                type="hidden"
+                id="movies-data"
+                value='@json($movies)'
+            >
         @endif
     @endif
     <div class="main-container h-100 container-fluid p-0 pb-3">
