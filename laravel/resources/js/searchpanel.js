@@ -22,10 +22,5 @@ $(function () {
                 $(this).addClass('d-none');
             }
         });
-
-        if(results.length === 0){
-            
-        }
-
     });
 });
