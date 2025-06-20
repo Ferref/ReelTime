@@ -13,7 +13,7 @@ $(function () {
 
     searchInput.on('input', function () {
         const query  = $(this).val().toLowerCase();
-        movies.each(function () {
+        const results = movies.each(function () {
             const title = $(this).find('.card-title').text().toLowerCase();
 
             if (title.includes(query)) {
@@ -22,6 +22,10 @@ $(function () {
                 $(this).addClass('d-none');
             }
         });
+
+        if(results.length === 0){
+            
+        }
 
     });
 });

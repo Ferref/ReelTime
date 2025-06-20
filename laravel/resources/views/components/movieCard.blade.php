@@ -6,9 +6,9 @@
     <div class="d-flex w-100">
       <a href="{{ route('movie.details', $movie['id']) }}" class="btn btn-outline-light w-50 me-2">Movie details</a>
         @if(request()->routeIs('watchlater'))
-          @include('components.card.RemoveFromWatchlist', ['movie' => $movie])
+          @include('components.card.remove-from-watchlist', ['movie' => $movie])
         @else
-          @include('components.card.AddToWatchlist', ['movie' => $movie])
+          @include('components.card.add-to-watchlist', ['movie' => $movie])
         @endif
     </div>
   </div>
