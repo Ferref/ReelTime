@@ -4,8 +4,7 @@ $(function () {
     const search = $('#search');
     const searchBox = $('#search-box');
     const searchInput = $('#search-input');
-    const moviesData = JSON.parse($('#movies-data').val()).results;
-    const movieSuggestions = $('#movie-suggestions');
+    const movies = $('.card');
 
     search.on('click', function (e) {
     e.preventDefault();
@@ -13,12 +12,16 @@ $(function () {
     });
 
     searchInput.on('input', function () {
-        movieSuggestions.empty();
         const query  = $(this).val().toLowerCase();
-        const matches = moviesData.filter(movie => movie.title.toLowerCase().includes(query));
+        movies.each(function () {
+            const title = $(this).find('.card-title').text().toLowerCase();
 
-        matches.forEach(movie => {
-            movieSuggestions.append(`<option value="${movie.title}">`);
-        })
+            if (title.includes(query)) {
+                $(this).removeClass('d-none');
+            } else {
+                $(this).addClass('d-none');
+            }
+        });
+
     });
 });
