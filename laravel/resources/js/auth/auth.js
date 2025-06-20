@@ -10,6 +10,8 @@ $(function () {
     const errorList = $('#errorList');
     const errorBox = $('#errorBox');
 
+    errorBox.addClass('d-none');
+
     errorList.empty();
 
     $.post(action, data)
