@@ -92,7 +92,22 @@ class MovieController extends Controller
                 : null;
         })->filter();
 
-        return view('watchlater', compact('movies'));
+        // If no result found suggest 3 random movies with messageBox
+        if(count($movies) === 0){
+            $emptyList = true;
+
+            $url = 'https://api.themoviedb.org/3/discover/movie';
+            $response = Http::get($url, [
+                'api_key' => $this->apiKey,
+                'sort_by' => 'popularity.desc',
+                'page' => rand(1, 500)
+            ]);
+
+            $fallbackMovies = $response->json()['results'] ?? [];
+            $movies = array_slice($fallbackMovies, 0, 3);
+        }
+        
+        return view('watchlater', compact('movies', 'emptyList'));
     }
 
     public function removeFromWatchlist(int $id)
