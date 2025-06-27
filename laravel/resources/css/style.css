@@ -245,3 +245,11 @@ footer {
   border-radius: 10px;
   color: white;
 }
+
+.footer-inner {
+  min-height: 60px;
+}
+
+.step:hover {
+  cursor: pointer;
+}

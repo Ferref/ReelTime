@@ -1,5 +1,11 @@
-<footer class="d-none d-md-block custom-dark text-light py-3 position-fixed bottom-0 w-100 z-3">
-  <div class="text-center">
-    <small>&copy; 2025 ReelTime. All rights reserved.</small>
+<footer class="custom-dark text-light position-fixed bottom-0 w-100 z-3">
+  <div class="footer-inner d-flex justify-content-between align-items-center px-3">
+    <div class="d-inline-flex align-items-center">
+      @include('layouts.paging')
+    </div>
+
+    <div class="text-white px-3 py-1 rounded d-inline-flex align-items-center">
+      &copy; 2025 ReelTime.
+    </div>
   </div>
 </footer>

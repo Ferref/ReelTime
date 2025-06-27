@@ -18,8 +18,11 @@ class MovieController extends Controller
     }
 
     public function getMovies(Request $request){
+        $validated = $request->validate([
+            'page' => 'integer|min:1|max:500'
+        ]);
 
-        $page = request()->query('page', 1);
+        $page = $validated['page'] ?? 1;
 
         $url = 'https://api.themoviedb.org/3/discover/movie';
         $response = Http::get($url, [
@@ -30,7 +33,7 @@ class MovieController extends Controller
 
         $movies = $response->json();
 
-        return view('home', compact('movies'));
+        return view('home', compact('movies', 'page'));
     }
 
     public function getMovieDetails($id){
