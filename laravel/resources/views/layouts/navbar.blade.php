@@ -40,5 +40,5 @@
 
 
 @stack('scripts')
-  @vite(['resources/js/searchpanel.js'])
+  @vite(['resources/js/search-panel.js', 'resources/js/filter-toggle.js'])
 @endstack

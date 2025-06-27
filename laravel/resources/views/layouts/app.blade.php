@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReelTime</title>
     <link rel="icon" type="image/x-icon" href="../popcorn.ico">
-    @vite(['resources/js/app.js', 'resources/js/showmodal.js', 'resources/sass/app.scss', 'resources/css/style.css'])
+    @vite(['resources/js/app.js', 'resources/js/show-modal.js', 'resources/sass/app.scss', 'resources/css/style.css'])
     @stack('scripts')
 </head>
 <body class="h-100">

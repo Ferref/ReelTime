@@ -239,3 +239,9 @@ footer {
   color: #717171;
 }
 
+.filter-inner {
+  border: 3px solid rgb(255, 0, 149) ;
+  box-shadow: 1px 1px 1px rgb(144, 1, 84);
+  border-radius: 10px;
+  color: white;
+}
