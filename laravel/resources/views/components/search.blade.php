@@ -13,7 +13,7 @@
     </button>
 </form>
 
-<div id="filter-box" class="z-3 position-absolute mt-5 text-dark start-0 container-fluid">
+<div id="filter-box" class="d-none z-3 position-absolute mt-5 text-dark start-0 container-fluid">
     <div class="filter-inner w-100 d-flex justify-content-center custom-dark">
         @include('components.filters')
     </div>
