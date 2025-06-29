@@ -253,3 +253,18 @@ footer {
 .step:hover {
   cursor: pointer;
 }
+
+label {
+  white-space: nowrap;
+}
+
+.custom-purple {
+  background-color: rgba(121, 9, 117, 1);
+  color: white;
+}
+
+.custom-purple:hover {
+  background-color: white;
+  color: rgba(121, 9, 117, 1);
+}
+

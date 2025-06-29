@@ -19,19 +19,23 @@ class MovieController extends Controller
 
     public function getMovies(Request $request){
         $validated = $request->validate([
-            'page' => 'integer|min:1|max:500'
+            'page' => 'integer|min:1|max:500',
+            'sort_by' => 'string|nullable'
         ]);
 
         $page = $validated['page'] ?? 1;
+        $sortBy = $validated['sort_by'] ?? 'popularity.desc';
 
         $url = 'https://api.themoviedb.org/3/discover/movie';
         $response = Http::get($url, [
             'api_key' => $this->apiKey,
-            'sort_by' => 'popularity.desc',
-            'page' => $page
+            'sort_by' => $sortBy,
         ]);
 
         $movies = $response->json();
+        $movies['results'] = collect($movies['results'] ?? [])
+            ->whereNotNull('poster_path')
+            ->values();
 
         return view('home', compact('movies', 'page'));
     }

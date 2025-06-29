@@ -4,7 +4,7 @@
       @include('layouts.paging')
     </div>
 
-    <div class="text-white px-3 py-1 rounded d-inline-flex align-items-center">
+    <div class="d-none text-white px-3 py-1 rounded d-sm-inline-flex align-items-center">
       &copy; 2025 ReelTime.
     </div>
   </div>
