@@ -12,9 +12,11 @@ use Illuminate\Http\Request;
 class MovieController extends Controller
 {
     protected string $apiKey;
+    protected string $moviesPerPage;
 
     public function __construct() {
         $this->apiKey = env('THEMOVIE_API_KEY');
+        $this->moviesPerPage = 18;
     }
 
     public function getMovies(Request $request){
@@ -30,6 +32,7 @@ class MovieController extends Controller
         $response = Http::get($url, [
             'api_key' => $this->apiKey,
             'sort_by' => $sortBy,
+            'page' => $page,
         ]);
 
         $movies = $response->json();
@@ -65,7 +68,6 @@ class MovieController extends Controller
 
             $user = $request->user();
 
-
             $entry = UserMovie::firstOrCreate([
                 'user_id' => $user->id,
                 'watchlist_id' => $id,
@@ -84,14 +86,23 @@ class MovieController extends Controller
         }
     }
 
-    public function getWatchlater()
+    public function getWatchlater(Request $request)
     {
         $user = Auth::user();
         $ids  = $user->UserMovies->pluck('watchlist_id');
 
-        $movies = $ids->map(function($tmdbId){
+        $validated = $request->validate([
+            'page' => 'integer|min:1|max:500',
+            'sort_by' => 'string|nullable'
+        ]);
+
+        $page = floor(($validated['page'] ?? 0) / $this->moviesPerPage) + 1;
+        $sortBy = $validated['sort_by'] ?? 'popularity.desc';
+
+        $movies = $ids->map(function($tmdbId) use($page, $sortBy){
             $resp = Http::get("https://api.themoviedb.org/3/movie/{$tmdbId}", [
                 'api_key' => $this->apiKey,
+                'sort_by' => $sortBy,
             ]);
 
             return $resp->successful()
