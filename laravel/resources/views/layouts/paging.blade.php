@@ -13,20 +13,5 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-auto ">
-            <form method="GET" action="{{ route('home') }}" class="d-flex flex-wrap align-items-center justify-content-center gap-2">
-                <label for="sort_by" class="form-label mb-0">Sort by</label>
-                <select class="form-select form-select-sm w-auto" name="sort_by" id="sort_by">
-                    <option value="popularity.desc">Popularity Desc</option>
-                    <option value="popularity.asc">Popularity Asc</option>
-                    <option value="release_date.desc">Release Desc</option>
-                    <option value="release_date.asc">Release Asc</option>
-                    <option value="vote_average.desc">Rating Desc</option>
-                    <option value="vote_average.asc">Rating Asc</option>
-                </select>
-                <button type="submit" class="btn btn-sm custom-purple">Apply</button>
-            </form>
-        </div>
-
     </div>
 </div>
