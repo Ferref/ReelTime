@@ -268,3 +268,8 @@ label {
   color: rgba(121, 9, 117, 1);
 }
 
+.filter-inner {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+

@@ -1,10 +1,14 @@
 <div class="container-fluid d-flex justify-content-around">
-  <div class="col-3 d-none d-md-flex justify-content-center align-items-center">
-    <img src="{{ asset('images/icons/Cat.png') }}" alt="Cat" class="ps-5">
+  <div class="col-3 d-none d-xl-flex justify-content-center align-items-center">
+    <img src="{{ asset('images/icons/Cat.png') }}" alt="Cat" class="ps-5 w-100 me-5">
   </div>
 
-  <form class="col-6 p-4 d-flex flex-column gap-4" method="GET" action="{{ route('home') }}">
+  <form class="col-12 col-xl-6 p-4 d-flex flex-column gap-4" method="GET" action="{{ route('home') }}">
     <div>
+      <h3 class="form-label">Title</h3>
+      <div class="form-input pb-5">
+        <input type="text" class="form-control" id="search-input" placeholder="...">
+      </div>
       <h3 class="form-label">Genre</h3>
       <div class="d-flex flex-wrap gap-2">
         <div class="form-check">
@@ -92,7 +96,8 @@
     </button>
   </form>
 
-  <div class="col-3 d-none d-md-flex justify-content-center align-items-center">
-    <img src="{{ asset('images/icons/Popcorn.png') }}" alt="Cat" class="ps-5">
+  <div class="col-3 d-none d-xl-flex justify-content-center align-items-center">
+    <img src="{{ asset('images/icons/Popcorn.png') }}" alt="Cat" class="ps-5 w-100 me-5">
   </div>
+
 </div>
