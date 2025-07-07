@@ -25,6 +25,10 @@
             <li class="nav-item">
                 @include('components.search')
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('livechat') }}">Live chat</a>
+            </li>
         </ul>
 
     </div>
