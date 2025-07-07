@@ -16,8 +16,8 @@
     </button>
 </form>
 
-<div id="filter-box" class="d-none z-3 position-absolute mt-5 text-dark start-0 container-fluid">
-    <button type="button" class="z-3 position-absolute btn-close btn-close-white m-5" aria-label="Close"></button>
+<div id="filter-box" class="d-none z-3 position-absolute mt-5 text-dark start-0 container-fluid d-flex justify-content-center flex-column">
+    <button type="button" class="z-3 btn-close btn-close-white m-5 me-0" aria-label="Close"></button>
     <div class="filter-inner d-flex justify-content-between custom-dark container col-12 col-md-9 py-3">
         @include('components.filters')
     </div>

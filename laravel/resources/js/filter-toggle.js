@@ -7,17 +7,15 @@ $(function() {
     const fastSearchPanel = $('#fast-search-panel');
     const footer = $('#footer');
 
-    filterBox.hide();
-    filterBox.removeClass('d-none');
-
     filterSwitch.on('click', function() {
-        filterBox.stop(true, true).slideToggle(300);
+        filterBox.toggleClass('d-none', filterBox.fadeToggle());
         fastSearchPanel.toggleClass('d-none');
         footer.slideToggle();
     });
 
     btnClose.on('click', function() {
-        filterBox.fadeOut();
+        filterBox.fadeOut(500, 'linear', () => filterBox.addClass('d-none'));
         fastSearchPanel.removeClass('d-none');
+        footer.slideToggle();
     })
 });
