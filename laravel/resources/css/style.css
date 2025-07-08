@@ -273,3 +273,12 @@ label {
   overflow-y: auto;
 }
 
+#chat-box {
+  border: 3px 0 3px 0 solid white;
+  box-shadow: 3px 3px 3px 3px rgba(255, 255, 255, .5);
+}
+
+.blur {
+  background-color: rgba(0, 0, 0, 0.5);
+  filter: blur(2px);
+}

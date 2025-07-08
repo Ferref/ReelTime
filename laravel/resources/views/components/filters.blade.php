@@ -1,4 +1,4 @@
-<div class="container-fluid d-flex justify-content-around">
+<div class="container-fluid d-flex justify-content-around position-relative z-3">
   <div class="col-3 d-none d-xl-flex justify-content-center align-items-center">
     <img src="{{ asset('images/icons/Cat.png') }}" alt="Cat" class="ps-5 w-100 me-5">
   </div>
