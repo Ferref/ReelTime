@@ -2,7 +2,7 @@ import $ from 'jquery';
 
 $(function() {
     const filterBox = $('#filter-box');
-    const btnClose = $('.btn-close');
+    const btnClose = $('.btn-custom-close');
     const filterSwitch = $('#filter-switch');
     const fastSearchPanel = $('#fast-search-panel');
     const footer = $('#footer');

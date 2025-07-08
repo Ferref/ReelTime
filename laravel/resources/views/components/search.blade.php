@@ -18,8 +18,7 @@
 
 <div id="filter-box" class="d-none z-3 position-absolute text-dark start-0 container-fluid d-flex justify-content-center flex-column">
 <div class="blur container-fluid vh-100 position-absolute start-0 z-0">AAAA</div>
-<button type="button" class="z-3 btn-close btn-close-white mt-4 me-0" aria-label="Close"></button>
-    <div class="filter-inner d-flex justify-content-between custom-dark container col-12 col-md-9 py-3">
+    <div class="filter-inner d-flex justify-content-between custom-dark container col-12 col-md-9 py-3 mt-5">
         @include('components.filters')
     </div>
 </div>
