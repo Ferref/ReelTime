@@ -6,7 +6,7 @@
             <div class="row justify-content-center gap-3">
                 @if(isset($movies['results']))
                     @foreach($movies['results'] as $movie)
-                        @include('components.MovieCard', ['movie' => $movie])
+                        @include('components.movie-card', ['movie' => $movie])
                     @endforeach
                 @endif
             </div>

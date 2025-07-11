@@ -11,7 +11,7 @@
       <div class="row justify-content-center gap-3">
         @if($movies)
           @foreach($movies as $movie)
-            @include('components.MovieCard', ['movie' => $movie])
+            @include('components.movie-card', ['movie' => $movie])
           @endforeach
         @endif
       </div>
