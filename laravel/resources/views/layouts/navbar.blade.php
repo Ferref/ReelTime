@@ -22,9 +22,15 @@
               <a class="nav-link" href="{{ route('logout') }}">Logout</a>
             </li>
 
-            <li class="nav-item">
-                @include('components.search')
-            </li>
+            @if($routeName = Route::currentRouteName() === 'livechat')
+              <li id="searchfilter-link" class="d-none nav-item">
+                  @include('components.search')
+              </li>
+              @else
+              <li id="searchfilter-link" class="nav-item">
+                  @include('components.search')
+              </li>
+            @endif
 
             <li class="nav-item">
               <a class="nav-link" href="{{ route('livechat') }}">Live chat</a>
