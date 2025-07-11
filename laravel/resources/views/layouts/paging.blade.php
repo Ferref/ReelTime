@@ -1,5 +1,5 @@
 @if(isset($page))
-    <div class="paging container-fluid w-100 py-3">
+    <div class="paging container-fluid w-100 p-2 p-md-1">
         <div class="row align-items-center justify-content-between g-3">
 
             <div class="col-12 col-md-auto">

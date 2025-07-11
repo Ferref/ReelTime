@@ -1,4 +1,4 @@
-<footer class="custom-dark text-light position-fixed bottom-0 w-100 z-3" id="footer">
+<footer id="footer" class="custom-dark text-light position-fixed bottom-0 w-100 z-3 m-0 p-0">
   <div class="footer-inner d-flex justify-content-between align-items-center px-3">
     <div class="d-inline-flex align-items-center">
       @include('layouts.paging')
