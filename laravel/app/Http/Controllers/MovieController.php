@@ -22,7 +22,13 @@ class MovieController extends Controller
     public function getMovies(Request $request){
         $validated = $request->validate([
             'page' => 'integer|min:1|max:500',
-            'sort_by' => 'string|nullable'
+            'sort_by' => 'string|nullable',
+            'title' => 'string|nullable',
+            'genre' => 'string|nullable',
+            'release_year_from' => 'int|nullable',
+            'release_year_to' => 'int|nullable',
+            'min_imdb' => 'int|nullable',
+
         ]);
 
         $page = $validated['page'] ?? 1;

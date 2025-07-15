@@ -1,21 +1,47 @@
 import $ from 'jquery';
+import { Collapse } from 'bootstrap';
 
-$(function() {
+$(function () {
     const filterBox = $('#filter-box');
     const btnClose = $('.btn-custom-close');
     const filterSwitch = $('#filter-switch');
     const fastSearchPanel = $('#fast-search-panel');
     const footer = $('#footer');
+    const navbarNav = $('#navbarNav');
+    const mainContainer = $('.main-container');
 
-    filterSwitch.on('click', function() {
-        filterBox.toggleClass('d-none', filterBox.fadeToggle());
-        fastSearchPanel.toggleClass('d-none');
-        footer.slideToggle();
+    function showFilterBox() {
+        filterBox.removeClass('d-none').hide().fadeIn(300);
+        fastSearchPanel.addClass('d-none');
+        footer.slideUp(300);
+        mainContainer.hide();
+        console.log('show')
+    }
+
+    function hideFilterBox() {
+        filterBox.fadeOut(300, () => {
+            filterBox.addClass('d-none');
+            fastSearchPanel.removeClass('d-none');
+            footer.slideDown(300);
+            mainContainer.show();
+        });
+
+        console.log('hide')
+    }
+
+    filterSwitch.on('click', function () {
+        const isSmall = window.innerWidth < 768;
+        const filterHidden = filterBox.hasClass('d-none');
+        console.log(isSmall)
+
+        if (isSmall && filterHidden && navbarNav.hasClass('show')) {
+            const navCollapse = Collapse.getOrCreateInstance(navbarNav[0]);
+            navbarNav.one('hidden.bs.collapse', showFilterBox);
+            navCollapse.hide();
+        } else {
+            filterHidden ? showFilterBox() : hideFilterBox();
+        }
     });
 
-    btnClose.on('click', function() {
-        filterBox.fadeOut(500, 'linear', () => filterBox.addClass('d-none'));
-        fastSearchPanel.removeClass('d-none');
-        footer.slideToggle();
-    })
+    btnClose.on('click', hideFilterBox);
 });

@@ -282,3 +282,8 @@ label {
   background-color: rgba(0, 0, 0, 0.5);
   filter: blur(2px);
 }
+
+#filter-box {
+  top: 0;
+  left: 0;
+}
