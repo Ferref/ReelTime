@@ -1,5 +1,5 @@
-<div id="filter-box" class="d-none contaienr-fluid position-fixed z-3 text-dark d-flex pt-5 justify-content-center align-items-center w-100 h-100">
-    <div class="filter-inner d-flex justify-content-between custom-dark container col-12 col-md-9 py-3 mt-5">
+<div id="filter-box" class="d-none container-fluid position-fixed z-3 text-dark d-flex pt-5 pt-md-0 mt-3 justify-content-center align-items-center w-100 h-100">
+    <div class="filter-inner d-flex justify-content-between custom-dark container col-12 col-md-9 py-3">
         <div class="container-fluid position-relative z-3">
             <form class="p-4" method="GET" action="{{ route('home') }}">
                 <div class="row align-items-center mb-4">

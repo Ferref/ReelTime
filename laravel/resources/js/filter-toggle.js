@@ -36,11 +36,11 @@ $(function () {
 
         if (isSmall && filterHidden && navbarNav.hasClass('show')) {
             const navCollapse = Collapse.getOrCreateInstance(navbarNav[0]);
-            navbarNav.one('hidden.bs.collapse', showFilterBox);
             navCollapse.hide();
-        } else {
-            filterHidden ? showFilterBox() : hideFilterBox();
+            navbarNav.one('hidden.bs.collapse', showFilterBox);
         }
+        
+        filterHidden ? showFilterBox() : hideFilterBox();
     });
 
     btnClose.on('click', hideFilterBox);
