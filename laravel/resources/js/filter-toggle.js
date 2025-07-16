@@ -13,9 +13,6 @@ $(function () {
     const body = $('body');
 
     function showFilterBox(isSmall) {
-        if(isSmall){
-            navParent.hide();
-        }
 
         body.css('overflow', 'hidden');
         filterBox.removeClass('d-none').hide().fadeIn(300);
@@ -25,10 +22,6 @@ $(function () {
     }
 
     function hideFilterBox(isSmall) {
-        if(isSmall){
-            navParent.show();
-        }
-
         body.css('overflow', 'visible');
         filterBox.fadeOut(300, () => {
             filterBox.addClass('d-none');
