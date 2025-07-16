@@ -16,16 +16,16 @@ $(function () {
     }
     });
 
-    searchInput.on('input', function () {
-        const query  = $(this).val().toLowerCase();
-        const results = movies.each(function () {
-            const title = $(this).find('.card-title').text().toLowerCase();
+    // searchInput.on('input', function () {
+    //     const query  = $(this).val().toLowerCase();
+    //     const results = movies.each(function () {
+    //         const title = $(this).find('.card-title').text().toLowerCase();
 
-            if (title.includes(query)) {
-                $(this).removeClass('d-none');
-            } else {
-                $(this).addClass('d-none');
-            }
-        });
-    });
+    //         if (title.includes(query)) {
+    //             $(this).removeClass('d-none');
+    //         } else {
+    //             $(this).addClass('d-none');
+    //         }
+    //     });
+    // });
 });

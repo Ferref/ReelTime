@@ -13,17 +13,20 @@ class MovieController extends Controller
 {
     protected string $apiKey;
     protected string $moviesPerPage;
+    protected string $source;
 
     public function __construct() {
         $this->apiKey = env('THEMOVIE_API_KEY');
         $this->moviesPerPage = 18;
+        $this->source = "https://api.themoviedb.org/3/";
     }
+
 
     public function getMovies(Request $request){
         $validated = $request->validate([
             'page' => 'integer|min:1|max:500',
             'sort_by' => 'string|nullable',
-            'title' => 'string|nullable',
+            'keyword' => 'string|nullable',
             'genre' => 'string|nullable',
             'release_year_from' => 'int|nullable',
             'release_year_to' => 'int|nullable',
@@ -33,13 +36,29 @@ class MovieController extends Controller
 
         $page = $validated['page'] ?? 1;
         $sortBy = $validated['sort_by'] ?? 'popularity.desc';
+        
+        $baseUrl = '';
 
-        $url = 'https://api.themoviedb.org/3/discover/movie';
-        $response = Http::get($url, [
+        // dd($request);
+        
+        if($request->has('keyword')){
+            $baseUrl = 'https://api.themoviedb.org/3/search/movie';
+        }
+        else {
+            $baseUrl = 'https://api.themoviedb.org/3/discover/movie';
+        }
+
+        $params = [
             'api_key' => $this->apiKey,
             'sort_by' => $sortBy,
             'page' => $page,
-        ]);
+        ];
+
+        if ($request->has('keyword')) {
+            $params['query'] = $request->input('keyword');
+        }
+
+        $response = Http::get($baseUrl, $params);
 
         $movies = $response->json();
         $movies['results'] = collect($movies['results'] ?? [])
