@@ -8,7 +8,7 @@
     @endif
 
     <div class="container-fluid movies-container py-5 d-flex h-100">
-      <div class="row justify-content-center gap-3">
+      <div class="row justify-content-center gap-3 w-100">
         @if($movies)
           @foreach($movies as $movie)
             @include('components.movie-card', ['movie' => $movie])

@@ -8,7 +8,7 @@
                     <img src="{{ asset('images/icons/Cat.png') }}" alt="Cat" class="w-100 me-5">
                 </div>
                 <div class="col-12 col-xl-6">
-                    <h4 class="form-label">Title</h4>
+                    <h4 class="form-label">Title (or keywords)</h4>
                     <input type="text" class="form-control" id="search-input" name="title" placeholder="...">
                 </div>
                 <div class="col-3 d-none d-xl-flex justify-content-center align-items-center">

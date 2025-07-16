@@ -136,6 +136,7 @@ class MovieController extends Controller
         })->filter();
 
         // If no result found suggest 3 random movies with messageBox
+        $emptyList = false;
         if(count($movies) === 0){
             $emptyList = true;
 
