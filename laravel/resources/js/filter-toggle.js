@@ -9,21 +9,31 @@ $(function () {
     const footer = $('#footer');
     const navbarNav = $('#navbarNav');
     const mainContainer = $('.main-container');
+    const navParent = $('nav');
+    const body = $('body');
 
-    function showFilterBox() {
+    function showFilterBox(isSmall) {
+        if(isSmall){
+            navParent.hide();
+        }
+
+        body.css('overflow', 'hidden');
         filterBox.removeClass('d-none').hide().fadeIn(300);
         fastSearchPanel.addClass('d-none');
         footer.slideUp(300);
-        mainContainer.hide();
         console.log('show')
     }
 
-    function hideFilterBox() {
+    function hideFilterBox(isSmall) {
+        if(isSmall){
+            navParent.show();
+        }
+
+        body.css('overflow', 'visible');
         filterBox.fadeOut(300, () => {
             filterBox.addClass('d-none');
             fastSearchPanel.removeClass('d-none');
             footer.slideDown(300);
-            mainContainer.show();
         });
 
         console.log('hide')
@@ -40,7 +50,7 @@ $(function () {
             navbarNav.one('hidden.bs.collapse', showFilterBox);
         }
         
-        filterHidden ? showFilterBox() : hideFilterBox();
+        filterHidden ? showFilterBox(isSmall) : hideFilterBox(isSmall);
     });
 
     btnClose.on('click', hideFilterBox);

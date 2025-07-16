@@ -279,8 +279,8 @@ label {
 }
 
 .blur {
-  background-color: rgba(0, 0, 0, 0.5);
-  filter: blur(2px);
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(10px);
 }
 
 #filter-box {

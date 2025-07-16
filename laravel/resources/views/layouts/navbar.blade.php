@@ -49,6 +49,5 @@
 </nav>
 
 
-@stack('scripts')
+@push('scripts')
   @vite(['resources/js/search-panel.js', 'resources/js/filter-toggle.js'])
-@endstack
