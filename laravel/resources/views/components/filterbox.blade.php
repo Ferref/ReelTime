@@ -64,8 +64,8 @@
                 <div class="col-12 col-md-2">
                     <h4 class="form-label">Age Restricted</h4>
                     <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="ageRestricted" name="age_restricted">
-                    <label class="form-check-label" for="ageRestricted">Include 18+</label>
+                    <input class="form-check-input" type="checkbox" id="includeAdult" name="include_adult">
+                    <label class="form-check-label" for="includeAdult">Include 18+</label>
                     </div>
                 </div>
                 <div class="col-12 col-md-3">

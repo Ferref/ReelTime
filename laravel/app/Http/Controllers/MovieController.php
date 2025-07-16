@@ -27,11 +27,11 @@ class MovieController extends Controller
             'page' => 'integer|min:1|max:500',
             'sort_by' => 'string|nullable',
             'keyword' => 'string|nullable',
-            'genre' => 'string|nullable',
+            'genre' => 'array|nullable',
             'release_year_from' => 'int|nullable',
             'release_year_to' => 'int|nullable',
             'min_imdb' => 'int|nullable',
-
+            'include_adult' => 'bool|nullable|default:false'
         ]);
 
         $page = $validated['page'] ?? 1;
@@ -54,11 +54,52 @@ class MovieController extends Controller
             'page' => $page,
         ];
 
+        $keyword = $request->input('keyword');
+        $keywordId = null;
+
         if ($request->has('keyword')) {
-            $params['query'] = $request->input('keyword');
+            $searchKeywordResponse = Http::get('https://api.themoviedb.org/3/search/keyword', [
+                'api_key' => $this->apiKey,
+                'query'   => $keyword,
+            ]);
+
+            $keywordResults = $searchKeywordResponse->json()['results'] ?? [];
+            $keywordId = $keywordResults[0]['id'] ?? null;
         }
 
-        $response = Http::get($baseUrl, $params);
+        // Additional filters
+        $params = [
+            'api_key'  => $this->apiKey,
+            'page'     => $request->input('page', 1),
+            'sort_by'  => $request->input('sort_by', 'popularity.desc'),
+        ];
+
+        if ($keywordId) {
+            $params['with_keywords'] = $keywordId;
+        }
+
+        if ($request->has('genre')) {
+            $params['with_genres'] = $request->input('genre');
+        }
+
+        if ($request->has('release_year_from')) {
+            $params['primary_release_date'] = $request->input('release_year_from') . '-01-01';
+        }
+
+        if ($request->has('release_year_to')) {
+            $params['primary_release_date'] = $request->input('release_year_to') . '-12-31';
+        }
+
+        if ($request->has('min_imdb')) {
+            $params['vote_average'] = $request->input('min_imdb');
+        }
+
+        if($request->has('include_adult')){
+            $params['include_adult'] = $request->input('include_adult');
+        }
+
+        $url = 'https://api.themoviedb.org/3/discover/movie';
+        $response = Http::get($url, $params);
 
         $movies = $response->json();
         $movies['results'] = collect($movies['results'] ?? [])
