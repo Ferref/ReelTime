@@ -3,102 +3,89 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserMovie;
-use Exception;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class MovieController extends Controller
 {
     protected string $apiKey;
-    protected string $moviesPerPage;
+    protected int $moviesPerPage;
     protected string $source;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->apiKey = env('THEMOVIE_API_KEY');
         $this->moviesPerPage = 18;
-        $this->source = "https://api.themoviedb.org/3/";
+        $this->source = 'https://api.themoviedb.org/3/';
     }
 
-
-    public function getMovies(Request $request){
+    public function getMovies(Request $request)
+    {
         $validated = $request->validate([
             'page' => 'integer|min:1|max:500',
             'sort_by' => 'string|nullable',
-            'keyword' => 'string|nullable',
+            'query' => 'string|nullable',
             'genre' => 'array|nullable',
-            'release_year_from' => 'int|nullable',
-            'release_year_to' => 'int|nullable',
-            'min_imdb' => 'int|nullable',
-            'include_adult' => 'bool|nullable|default:false'
+            'release_year_from' => 'integer|nullable',
+            'release_year_to' => 'integer|nullable',
+            'min_imdb' => 'integer|nullable',
+            'include_adult' => 'boolean|nullable|default:false'
         ]);
 
         $page = $validated['page'] ?? 1;
         $sortBy = $validated['sort_by'] ?? 'popularity.desc';
-        
-        $baseUrl = '';
 
-        // dd($request);
-        
-        if($request->has('keyword')){
-            $baseUrl = 'https://api.themoviedb.org/3/search/movie';
-        }
-        else {
-            $baseUrl = 'https://api.themoviedb.org/3/discover/movie';
+        $keywordId = null;
+        $joinedQuery = null;
+
+        if (!empty($validated['query'])) {
+            $joinedQuery = implode('+', explode(' ', trim($validated['query'])));
+
+            $searchKeywordResponse = Http::get("{$this->source}search/keyword", [
+                'api_key' => $this->apiKey,
+                'query' => $joinedQuery,
+            ]);
+
+            $queryResults = $searchKeywordResponse->json()['results'] ?? [];
+            $keywordId = $queryResults[0]['id'] ?? null;
         }
 
         $params = [
             'api_key' => $this->apiKey,
-            'sort_by' => $sortBy,
             'page' => $page,
+            'sort_by' => $sortBy,
         ];
 
-        $keyword = $request->input('keyword');
-        $keywordId = null;
-
-        if ($request->has('keyword')) {
-            $searchKeywordResponse = Http::get('https://api.themoviedb.org/3/search/keyword', [
-                'api_key' => $this->apiKey,
-                'query'   => $keyword,
-            ]);
-
-            $keywordResults = $searchKeywordResponse->json()['results'] ?? [];
-            $keywordId = $keywordResults[0]['id'] ?? null;
+        if ($joinedQuery) {
+            $params['query'] = $joinedQuery;
         }
-
-        // Additional filters
-        $params = [
-            'api_key'  => $this->apiKey,
-            'page'     => $request->input('page', 1),
-            'sort_by'  => $request->input('sort_by', 'popularity.desc'),
-        ];
 
         if ($keywordId) {
             $params['with_keywords'] = $keywordId;
         }
 
-        if ($request->has('genre')) {
-            $params['with_genres'] = $request->input('genre');
+        if (!empty($validated['genre'])) {
+            $params['with_genres'] = $validated['genre'];
         }
 
-        if ($request->has('release_year_from')) {
-            $params['primary_release_date'] = $request->input('release_year_from') . '-01-01';
+        if (!empty($validated['release_year_from'])) {
+            $params['primary_release_date.gte'] = $validated['release_year_from'] . '-01-01';
         }
 
-        if ($request->has('release_year_to')) {
-            $params['primary_release_date'] = $request->input('release_year_to') . '-12-31';
+        if (!empty($validated['release_year_to'])) {
+            $params['primary_release_date.lte'] = $validated['release_year_to'] . '-12-31';
         }
 
-        if ($request->has('min_imdb')) {
-            $params['vote_average'] = $request->input('min_imdb');
+        if (!empty($validated['min_imdb'])) {
+            $params['vote_average.gte'] = $validated['min_imdb'];
         }
 
-        if($request->has('include_adult')){
-            $params['include_adult'] = $request->input('include_adult');
+        if (array_key_exists('include_adult', $validated)) {
+            $params['include_adult'] = $validated['include_adult'];
         }
 
-        $url = 'https://api.themoviedb.org/3/discover/movie';
+        $url = "{$this->source}discover/movie";
         $response = Http::get($url, $params);
 
         $movies = $response->json();
@@ -109,20 +96,21 @@ class MovieController extends Controller
         return view('home', compact('movies', 'page'));
     }
 
-    public function getMovieDetails($id){
-        $url = "https://api.themoviedb.org/3/movie/{$id}";
+    public function getMovieDetails($id)
+    {
+        $url = "{$this->source}movie/{$id}";
 
         $response = Http::get($url, [
             'api_key' => $this->apiKey,
         ]);
 
-        if($response->failed()){
-            abort(404, "Movie not found");
+        if ($response->failed()) {
+            abort(404, 'Movie not found');
         }
 
         $details = $response->json();
 
-        return view("details", compact('details'));
+        return view('details', compact('details'));
     }
 
     public function toWatchlist(Request $request, $id)
@@ -144,7 +132,6 @@ class MovieController extends Controller
             }
 
             return response()->json(['message' => 'Movie added to watchlist']);
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json(['message' => 'Validation failed', 'errors' => $e->errors()], 422);
         } catch (\Exception $e) {
@@ -155,7 +142,7 @@ class MovieController extends Controller
     public function getWatchlater(Request $request)
     {
         $user = Auth::user();
-        $ids  = $user->UserMovies->pluck('watchlist_id');
+        $ids = $user->UserMovies->pluck('watchlist_id');
 
         $validated = $request->validate([
             'page' => 'integer|min:1|max:500',
@@ -165,23 +152,21 @@ class MovieController extends Controller
         $page = floor(($validated['page'] ?? 0) / $this->moviesPerPage) + 1;
         $sortBy = $validated['sort_by'] ?? 'popularity.desc';
 
-        $movies = $ids->map(function($tmdbId) use($page, $sortBy){
-            $resp = Http::get("https://api.themoviedb.org/3/movie/{$tmdbId}", [
+        $movies = $ids->map(function ($tmdbId) use ($sortBy) {
+            $resp = Http::get("{$this->source}movie/{$tmdbId}", [
                 'api_key' => $this->apiKey,
                 'sort_by' => $sortBy,
             ]);
 
-            return $resp->successful()
-                ? $resp->json()
-                : null;
+            return $resp->successful() ? $resp->json() : null;
         })->filter();
 
         // If no result found suggest 3 random movies with messageBox
         $emptyList = false;
-        if(count($movies) === 0){
+        if ($movies->isEmpty()) {
             $emptyList = true;
 
-            $url = 'https://api.themoviedb.org/3/discover/movie';
+            $url = "{$this->source}discover/movie";
             $response = Http::get($url, [
                 'api_key' => $this->apiKey,
                 'sort_by' => 'popularity.desc',
@@ -191,7 +176,7 @@ class MovieController extends Controller
             $fallbackMovies = $response->json()['results'] ?? [];
             $movies = array_slice($fallbackMovies, 0, 3);
         }
-        
+
         return view('watchlater', compact('movies', 'emptyList'));
     }
 
@@ -206,5 +191,4 @@ class MovieController extends Controller
             $deleted ? 200 : 404
         );
     }
-
 }

@@ -5,7 +5,7 @@
         </button>
         <div id="search-box" class="d-none d-inline-flex gap-3">
             <div>
-                <input name="keyword" id="search-input" list="movie-suggestions" class="form-control me-2" type="search" placeholder="Search by keyword" aria-label="Search" />
+                <input name="query" id="search-input" list="movie-suggestions" class="form-control me-2" type="search" placeholder="Search by keyword(s)" aria-label="Search" />
                 <datalist id="movie-suggestions"></datalist>
             </div>
             <button class="btn custom-purple">Go</button>
@@ -15,8 +15,3 @@
         <i class="bi bi-filter"></i> Search Filter
     </button>
 </form>
-
-
-
-
-            
