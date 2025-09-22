@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-12 col-xl-6">
                     <h4 class="form-label">Title (or keywords)</h4>
-                    <input type="text" class="form-control" id="search-input" name="title" placeholder="...">
+                    <input type="text" class="form-control" id="advanced-search-input" name="title-query-input" placeholder="...">
                 </div>
                 <div class="col-3 d-none d-xl-flex justify-content-center align-items-center">
                     <img src="{{ asset('images/icons/Popcorn.png') }}" alt="Popcorn" class="w-100 ps-5">

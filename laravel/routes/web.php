@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth as AuthCheck;
 
 Route::get('/', function () {
 
-    if(AuthCheck::check()) {
+    if (AuthCheck::check()) {
         return redirect('/home');
     }
 
@@ -25,7 +25,7 @@ Route::post('/login', [UserController::class, 'login'])->name('login');
 
 
 // If logged in
-Route::middleware([EnsureAuth::class])->group(function(){
+Route::middleware([EnsureAuth::class])->group(function() {
     Route::get('/home', [MovieController::class, 'getMovies'])->name('home');
     Route::get('/watchlater', [MovieController::class, 'getWatchlater'])->name('watchlater');
     Route::get('/livechat', [fn() => view('livechat')])->name('livechat');

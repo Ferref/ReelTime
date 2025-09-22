@@ -25,13 +25,24 @@ class MovieController extends Controller
         $validated = $request->validate([
             'page' => 'integer|min:1|max:500',
             'sort_by' => 'string|nullable',
-            'query' => 'string|nullable',
+            'title-search-input' => 'string|nullable',
+            'advanced-search-input' => 'string|nullable',
             'genre' => 'array|nullable',
             'release_year_from' => 'integer|nullable',
             'release_year_to' => 'integer|nullable',
             'min_imdb' => 'integer|nullable',
             'include_adult' => 'boolean|nullable|default:false'
         ]);
+
+
+        $searchInTitleOnly = false;
+
+        if (!is_null($request['title-search-input'])) {
+            $params['query'] = $validated['title-search-input'];
+            $searchInTitleOnly = true;
+        } elseif (!is_null($request['adavnced-search-input'])) {
+            $params['query'] = $validated['advanced-search-input'];
+        }
 
         $page = $validated['page'] ?? 1;
         $sortBy = $validated['sort_by'] ?? 'popularity.desc';
@@ -89,9 +100,23 @@ class MovieController extends Controller
         $response = Http::get($url, $params);
 
         $movies = $response->json();
+
         $movies['results'] = collect($movies['results'] ?? [])
             ->whereNotNull('poster_path')
             ->values();
+
+
+        $filteredMovieResults = [];
+        if ($searchInTitleOnly) {
+            foreach ($movies['results'] as $movie) {
+                if (str_contains(strtolower($movie['original_title']), strtolower($validated['title-search-input']))) {
+                    $filteredMovieResults[] = $movie;
+                }
+            }
+
+            $movies['results'] = $filteredMovieResults;
+        }
+
 
         return view('home', compact('movies', 'page'));
     }
